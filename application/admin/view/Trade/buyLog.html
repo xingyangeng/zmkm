@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>认购记录</title>
+    <meta name="keywords" content="认购记录">
+    <meta name="description" content="认购记录">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/state/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/state/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/state/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/state/css/animate.min.css" rel="stylesheet">
+    <link href="/state/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <script src="/state/js/layer/layer.js" type="text/javascript" charset="utf-8" async defer></script>
+    <link rel="stylesheet" type="text/css" href="/state/js/layer/skin/default/layer.css">
+    
+    <style>
+        .table-responsive div{
+            text-align: right;
+        }
+        .spiner-example{
+            display: none;
+        }
+    </style>
+    <style type="text/css" media="screen">
+        .table>tbody>tr>td{
+            text-align: center;
+        }
+        .table>thead>tr>th{
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>认购记录</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <form name="admin_list" action="/admin/Trade/buyLog" method="get">
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown">
+                                            <span id="user-search-type-name">搜索信息</span>
+                                        </button>
+                                    </div>
+                                    <!--<input type="hidden" id="user-search-type" value="account" name="type">-->
+                                    <input type="text" placeholder="输入用户ID或手机号"  class="input-sm form-control"  name="search" id="search" value="{$search}"> <span class="input-group-btn">
+                                <button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="hr-line-dashed" style="margin: 10px"></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table table-hover">
+                            <thead>
+                            <tr>
+                               
+                                <th>会员ID</th>
+                               
+                                <th>会员手机号</th>
+                                <th>认购数量</th>
+                                <th>释放剩余数量</th>
+                                <th>价格(ETH)</th>
+                                <th>认购时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="list_content">
+                            {volist name="list" id="v"}
+                                <tr>
+                                   
+                                    <td>{$v.user_id}</td>
+                                 
+                                    <td>{$v.mobile_phone}</td>
+                                    <td>{$v.total_num}</td>
+                                    <td>{$v.num}</td>
+                                    <td>{$v['exchange']}</td>
+                                    <td>{$v.created_at}</td>
+                                </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        <!-- 分页 -->
+                        {$list|raw}
+                        
+                    </div>
+                    <div class="spiner-example">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+</div>
+<script src="/state/js/jquery.min.js"></script>
+<script src="/state/js/bootstrap.min.js"></script>
+<script src="/state/js/plugins/layer/layer.min.js"></script>
+<script src="/state/js/plugins/laypage/laypage.js"></script>
+<script src="/state/js/plugins/laytpl/laytpl.js"></script>
+<script src="/state/js/common.js"></script>
+<script>
+
+    // 搜索
+    function onclickme(page)
+    {
+        var action = $('#search').val();
+        location.href=('/admin/User/index?page='+page+'&search='+action);
+    }
+
+    // 添加用户
+    function addUser()  
+    {
+        var index=layer.open({
+            type: 2,
+            title: '添加用戶',
+            area: ['500px', '500px'],
+            content: 'adduser' 
+        });
+    }
+
+    // 修改用户
+    function editUser(id)
+    {
+        layer.open({
+            type: 2, 
+            title: '用戶信息',
+            area: ['100%', '100%'],
+            content: 'userInfo/id/'+id, 
+        });
+    }
+
+    // 添加石油
+    function addBucket(id)
+    {
+        layer.open({
+            type: 2, 
+            title: '添加石油',
+            area: ['500px', '500px'],
+            content: 'addBucket/id/'+id, 
+        });
+    }
+
+    // 添加金豆
+    function addBean(id)
+    {
+        layer.open({
+            type: 2, 
+            title: '添加金豆',
+            area: ['500px', '500px'],
+            content: 'addBean/id/'+id, 
+        });
+    }
+
+    //修改  用户的基本状态
+    function changeState(id){
+        var objState = $('#state'+id);
+        $.post("/admin/User/edit_status",{id:id},function(e){
+            if(e.state > 0 ){
+                layer.msg(e.message, {icon: 5});
+            }else{
+                if(e.data == 0){
+                    layer.msg(e.message, {icon: 6});
+                    objState.removeClass('label-primary').addClass('label-danger').html('冻结');
+                }else{
+                    layer.msg(e.message, {icon: 6});
+                    objState.removeClass('label-danger').addClass('label-primary').html('正常');
+                }
+            }
+        })
+    }
+
+    //修改信息
+    function modify(id){
+        location.href = '/admin/User/modify?id='+id;
+    }
+
+    //删除
+    function del(id){
+        layer.confirm('是否真的删除该用户(谨慎操作)？', {
+            btn: ['确定','取消']
+        }, function(){
+            $.post("/admin/User/delete_user",{id:id},function(data){
+                if(data.status == 0){
+                    layer.msg(data.message, {icon: 6,time:1000},function(){
+                        window.location.reload();
+                     });
+                }else{
+                    layer.msg(data.message, {icon: 5,time:1000},function(){
+                        window.location.reload();
+                     });
+                }
+                 
+            });
+        });
+    }
+
+</script>
+</body>
+</html>

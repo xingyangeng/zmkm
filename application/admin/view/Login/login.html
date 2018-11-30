@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>RSI后台登录</title>
+    <link href="/state/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/state/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/state/css/animate.min.css" rel="stylesheet">
+    <link href="/state/css/style.min.css" rel="stylesheet">
+    <link href="/state/css/login.min.css" rel="stylesheet">
+
+    <script>
+        if(window.top!==window.self){window.top.location=window.location};
+    </script>
+</head>
+
+<body class="signin">
+    <div class="signinpanel">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="signin-info">
+                    <div class="logopanel m-b">
+                        <h1>欢迎</h1>
+                    </div>
+                    <div class="m-b"></div>
+                    <h4>RSI后台管理系统</strong></h4>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <form id="doLogin" name="doLogin" method="post" action="/admin/Login/">
+                    <h4 class="no-margins">登录：</h4>
+                    <p class="m-t-md">RSI后台</p>
+                    <input type="text" id="username" name="user_name" class="form-control uname" placeholder="管理员账号" value=""  />
+                    <input type="password" id="password" name="user_pwd" class="form-control pword m-b" placeholder="密码" value=""/>
+                     <input  class="form-control " type="text" id="captcha" name="captcha" required placeholder="点击图片更换" style="color: black">
+                    <span class="yzm">{:captcha_img()}</span>
+                    <button class="btn btn-primary btn-block">登录</button>
+                </form>
+            </div>
+        </div>
+        <div class="signup-footer">
+            <div class="pull-left">
+                &copy; 2017 guojin.make
+            </div>
+        </div>
+    </div>
+<script src="/state/js/jquery.min.js"></script>
+<script src="/state/js/jquery.form.js"></script>
+<script src="/state/js/layer/layer.js"></script>
+<script>
+    $(function(){
+        $(".yzm img").click(function(){
+            $(this).attr('src',$(this).attr("src")+"?"+Math.random());
+        });
+        $('#doLogin').ajaxForm({
+                    beforeSubmit :  checkForm, //提交前
+                    success      :  complete,  //提交成功后
+                    dataType     :  'json'    // 返回的数据类型
+                    }
+                );
+                function checkForm(){
+                    if($('#username').val() == '')
+                    {
+                        layer.tips('用户名不能为空', '#username',{
+                            tips: [2, '#d9534f']
+                        });
+                        $('#username').focus();
+                        return false;
+                    }
+                    if($('#password').val() == ''){
+                        layer.tips('密码不能为空', '#password',{
+                            tips: [2, '#d9534f']
+                        });
+                        $('#username').focus();
+                        return false;
+                    }
+                    if($('#captcha').val() == '')
+                    {
+                        layer.tips('验证码不能为空', '#captcha',
+                            {
+                            tips: [2, '#d9534f']
+                        });
+                        $('#captcha').focus();
+                        return false;
+                    }
+                    $('button').removeClass('btn-primary').attr('disabled','disabled').addClass('btn-danger').text('登录中...')
+                }
+                function complete(e){
+                    if(e.status > 0){
+                        $('button').removeClass('btn-danger').removeAttr('disabled').addClass('btn-primary').text('登录');
+
+                        layer.msg(e.massage, {icon: 5,time:1000});
+
+                        return false;
+                    }else{
+                        layer.msg(e.massage, {time:500},function (index) {
+                            layer.close(index);
+                            window.location.href='/admin/Index/index';
+                        });
+                    }
+                }
+
+    })
+</script>
+</body>
+
+
+
+</html>

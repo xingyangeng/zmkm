@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>RSI后台管理系统</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/state/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/state/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/state/css/animate.min.css" rel="stylesheet">
+    <link href="/state/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span><img alt="image" class="img-circle" src="/state/img/profile_small.jpg" /></span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">管理员姓名</strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">超级管理员
+                                    </span>
+                                </span>
+                        </a>
+                        </div>
+                        <div class="logo-element">RSI
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <a href="#">
+                        <i class="glyphicon glyphicon-leaf"></i>
+                        <span class="nav-label">会员管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="/admin/User/index" data-index="0">会员列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <i class="glyphicon glyphicon-leaf"></i>
+                        <span class="nav-label">认购管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="/admin/Index/goods" data-index="0">认购设置</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/admin/Trade/buyLog">认购记录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <i class="fa fa-comments"></i>
+                        <span class="nav-label">释放记录</span>
+                        <span class="fa arrow" ></span>
+                    </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="/admin/Trade/releaseLog" data-index="0">释放记录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <i class="fa fa-comments"></i>
+                        <span class="nav-label">回购记录</span>
+                        <span class="fa arrow" ></span>
+                    </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="/admin/Trade/hgLog" data-index="0">回购记录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                        <i class="glyphicon glyphicon-menu-hamburger"></i>
+                        <span class="nav-label">反馈记录</span>
+                        <span class="fa arrow" ></span>
+                    </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="/admin/Feedback/index" data-index="0">反馈记录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <li>
+                        <a href="#">
+                        <i class="fa fa-comments"></i>
+                        <span class="nav-label">团队中心</span>
+                        <span class="fa arrow" ></span>
+                    </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                            <a class="J_menuItem"　 href="/admin/Team/index.html">团队领导</a>
+                        </li>
+                            <li>
+                                <a class="J_menuItem" 　 href="/admin/Team/recommend.html">直推信息</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <li>
+                        <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">系统设置</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="/admin/Index/configShow">参数设置</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--<li>
+                    <a href="#">
+                        <i class="fa fa-comments"></i>
+                        <span class="nav-label">反馈中心</span>
+                        <span class="fa arrow" ></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+
+                        <li>
+                            <a class="J_menuItem" href="/admin/Leavemassage/feedBack">反馈箱</a>
+                        </li>
+
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-leaf"></i>
+                        <span class="nav-label">财务中心</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="/admin/Finance/index" data-index="0">用户账户管理</a>
+                        </li>
+                    </ul>
+                </li>-->
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" method="post" action="#">
+                            <div class="form-group">
+                                <input type="text" disabled placeholder="点击左边按钮可隐藏左边栏目" class="form-control" name="top-search" id="top-search">
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li class="m-t-xs">
+                                    <div class="dropdown-messages-box">
+                                        <a href="#" class="pull-left">
+                                        <img alt="image" class="img-circle" src="/state/img/a7.jpg">
+                                    </a>
+                                        <div class="media-body">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <a href="#" class="pull-left">
+                                        <img alt="image" class="img-circle" src="/state/img/a4.jpg">
+                                    </a>
+                                        <div class="media-body ">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a class="J_menuItem" href="#">
+                                        <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+                                    </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a class="J_menuItem" href="#">
+                                        <strong>查看所有 </strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row content-tabs">
+                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right">
+                    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+                    </button>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                        </li>
+                        <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="/admin/Login/login_out" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            </div>
+            <div class="row J_mainContent" id="content-main">
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="indexMain.html" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            </div>
+            <div class="footer">
+                <div class="pull-right">&copy;2017 <a href="#" target="_blank">石油国际</a>
+                </div>
+            </div>
+        </div>
+        <!--右侧部分结束-->
+    </div>
+    <script src="/state/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/state/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/state/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/state/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/state/js/plugins/layer/layer.min.js"></script>
+    <script src="/state/js/hplus.min.js?v=4.1.0"></script>
+    <script type="text/javascript" src="/state/js/contabs.min.js"></script>
+</body>
+
+</html>

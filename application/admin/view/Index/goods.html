@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>认购设置</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/state/css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="/state/css/style.min.css" rel="stylesheet">
+    <link href="/state/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <style type="text/css">
+        .col-sm-1{width: auto};
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <!-- <div class="ibox-title">
+                    <h5><a href="#"><button class="btn btn-primary btn-sm">调控数目</button></a><small>&nbsp;&nbsp;调控数目</small></h5>
+
+                    <div class="ibox-tools">
+
+                    </div>
+                </div> -->
+                <div class="ibox-content">
+                    <form method="post" id="form1" name="form1" class="form-horizontal" action="/admin/Index/goodsEdit">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">期数：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="times" name="times" value="{$goods.times}">
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">数量：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="num" name="num" value="{$goods.num}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">剩余数量：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="sy_num" name="sy_num" value="{$goods.sy_num}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">价格：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="exchange" name="exchange" value="{$goods.exchange}">
+                            </div>  
+                            <label class="col-sm-1 control-label" style="color: red">注：1ETH可购买的RSI数量</label>                        
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <a class="btn btn-white" href="javascript:history.go(-1)">返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/state/js/jquery.min.js"></script>
+<script src="/state/js/jquery.form.js"></script>
+<script src="/state/js/plugins/switchery/switchery.js"></script>
+<script src="/state/js/plugins/layer/layer.min.js"></script>
+<script src="/state/js/common.js"></script>
+<script>
+    $(function(){
+        $('#form1').ajaxForm({
+            beforeSubmit: checkFun,
+            success: complete,
+            dataType: 'json'
+        });
+        function checkFun(){
+            if($('#times').val() == ''){
+                layer.tips('期数不能为空', '#times',{
+                    tips: [2, '#d9534f']
+                });
+                $('#times').focus();
+                return false;
+            }
+            if($('#num').val() == ''){
+                layer.tips('数量不能为空', '#num',{
+                    tips: [2, '#d9534f']
+                });
+                $('#num').focus();
+                return false;
+            }
+            if($('#exchange').val() == ''){
+                layer.tips('价格不能为空', '#exchange',{
+                    tips: [2, '#d9534f']
+                });
+                $('#exchange').focus();
+                return false;
+            }
+            if($('#sy_num').val() == ''){
+                layer.tips('剩余数量不能为空', '#sy_num',{
+                    tips: [2, '#d9534f']
+                });
+                $('#sy_num').focus();
+                return false;
+            }
+        }
+        function complete(data){
+            if(data.status == 0){ 
+                layer.msg(data.message,{icon:6,time:1000},function(){
+                    location.reload();
+                })
+            }else{
+                layer.msg(data.message,{icon:5,time:1000},function(){
+                    location.reload();
+                })
+            }
+            
+        }
+
+    })
+</script>
+</body>
+</html>

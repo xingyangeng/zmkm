@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反馈记录</title>
+    <meta name="keywords" content="反馈记录">
+    <meta name="description" content="反馈记录">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/state/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/state/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/state/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/state/css/animate.min.css" rel="stylesheet">
+    <link href="/state/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <script src="/state/js/layer/layer.js" type="text/javascript" charset="utf-8" async defer></script>
+    <link rel="stylesheet" type="text/css" href="/state/js/layer/skin/default/layer.css">
+    
+    <style>
+        .table-responsive div{
+            text-align: right;
+        }
+        .spiner-example{
+            display: none;
+        }
+         .input-group-ul{
+            list-style: none;
+        }
+        .input-group-ul li{
+            display: inline-block;
+            position: relative;
+            padding-left: 70px;  
+            line-height: 30px;
+            width: 30%;   
+        }
+        .input-group-ul li>span{
+            position: absolute;
+            top:0;
+            left: 0;
+            display: inline-block;
+            width: 60px;
+            line-height: 34px;
+            text-align: right;
+        }
+       .input-group-btn{
+        position: relative;
+        top: -3px;
+        left: -9%;
+       }
+    </style>
+    <style type="text/css" media="screen">
+        .table>tbody>tr>td{
+            text-align: center;
+        }
+        .table>thead>tr>th{
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>反馈记录</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <form name="admin_list" action="/admin/Feedback/index" method="get">
+                            <div>
+                                <div class="input-group">
+                                    <ul class="input-group-ul">
+                                        <li> 
+                                        <span> 状态：</span> <select name="style"  class="form-control">
+                                                    <option value="-1">请选择</option>
+                                                    <option value="0" {if $style eq 0}selected{/if}>未处理</option>
+                                                    <option value="1" {if $style eq 1}selected{/if}>已处理</option>
+                                                </select>
+                                        </li>
+                                         <li> 
+                                            <input type="text" placeholder="输入用户ID或手机号"  class="input-sm form-control"  name="search" id="search" value="{$search}"> 
+                                        </li>
+                                    </ul>
+                                    <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="hr-line-dashed" style="margin: 10px"></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table table-hover">
+                            <thead>
+                            <tr>
+                               
+                                <th>会员ID</th>
+                                <th>会员手机号</th>
+                                <th>反馈类型</th>
+                                <th>反馈内容</th>
+                                <th>状态</th>
+                                <th>添加时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="list_content">
+                            {volist name="list" id="v"}
+                                <tr>
+                                    
+                                    <td>{$v.user_id}</td>
+                                    <td>{$v.mobile_phone}</td>
+                                    <td>{switch $v.style}
+                                        {case 1}没有收到币{/case}
+                                        {case 2}没有收到钱{/case}
+                                        {case 3}数据问题{/case}
+                                        {case 4}发展建议{/case}
+                                        {case 5}其他问题{/case}
+                                    {/switch}
+                                    </td>
+                                    <td>{$v.reason}</td>
+                                    <td>{switch $v.status}
+                                        {case 0}未处理{/case}
+                                        {case 1}已处理{/case}
+                                    {/switch}
+                                    </td>
+                                    <td>{$v.created_at}</td>
+                                    <td>
+                                        {if $v.status neq 1}
+                                        <a href="javascript:;" class="btn btn-primary btn-xs" onclick="(changeState({$v.id}))"><i class="fa fa-paste"></i>处理</a></td>
+                                        {/if}
+                                </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        <!-- 分页 -->
+                        {$list|raw}
+                        
+                    </div>
+                    <div class="spiner-example">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+</div>
+<script src="/state/js/jquery.min.js"></script>
+<script src="/state/js/bootstrap.min.js"></script>
+<script src="/state/js/plugins/layer/layer.min.js"></script>
+<script src="/state/js/plugins/laypage/laypage.js"></script>
+<script src="/state/js/plugins/laytpl/laytpl.js"></script>
+<script src="/state/js/common.js"></script>
+<script>
+
+    //处理
+    function changeState(id){
+        layer.confirm('确定要标记为已处理吗？', {
+            btn: ['确定','取消']
+        }, function(){
+            $.post("/admin/Feedback/changeState",{id:id},function(data){
+                if(data.status == 0){
+                    layer.msg(data.message, {icon: 6,time:1000},function(){
+                        window.location.reload();
+                     });
+                }else{
+                    layer.msg(data.message, {icon: 5,time:1000},function(){
+                        window.location.reload();
+                     });
+                }
+                 
+            });
+        });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>参数设置</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/state/css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="/state/css/style.min.css" rel="stylesheet">
+    <link href="/state/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <style type="text/css">
+        .col-sm-1{width: auto};
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <!-- <div class="ibox-title">
+                    <h5><a href="#"><button class="btn btn-primary btn-sm">调控数目</button></a><small>&nbsp;&nbsp;调控数目</small></h5>
+
+                    <div class="ibox-tools">
+
+                    </div>
+                </div> -->
+                <div class="ibox-content">
+                    <form method="post" id="form1" name="form1" class="form-horizontal" action="/admin/Index/configEdit">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">认购赠送倍数：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="give_percent" name="give_percent" value="{$config.give_percent}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">认购锁仓时间：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="lock_time" name="lock_time" value="{$config.lock_time}">
+                            </div>
+                            <label class="col-sm-1 control-label">天</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">总账户地址：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="eth_address" name="eth_address" value="{$config.eth_address}">
+                            </div>                          
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">总账户私钥</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="eth_private_key" name="eth_private_key" value="{$config.eth_private_key}">
+                            </div>                           
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否开启回购转流通</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="is_transition" name="is_transition" value="{$config.is_transition}">
+                            </div>                           
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提现eth手续费</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="charge" name="charge" value="{$config.charge}">
+                            </div> 
+                            <label class="col-sm-1 control-label">%</label>                         
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">静态释放总比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="j_release_total" name="j_release_total" value="{$config.j_release_total}">
+                            </div>
+                            <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">静态释放回购账户比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="j_release_hg" name="j_release_hg" value="{$config.j_release_hg}">
+                            </div>
+                            <label class="col-sm-1 control-label">%</label>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">静态释放流通账户比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="j_release_lt" name="j_release_lt" value="{$config.j_release_lt}">
+                            </div>
+                            <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">静态释放锁仓账户比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="j_release_sc" name="j_release_sc" value="{$config.j_release_sc}">
+                            </div>
+                            <label class="col-sm-1 control-label">%</label>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">动态释放直推比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="d_release_one" name="d_release_one" value="{$config.d_release_one}">
+                            </div>
+                            <label class="col-sm-1 control-label">%</label>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">动态释放间推比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="d_release_two" name="d_release_two" value="{$config.d_release_two}">
+                            </div>
+                            <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">动态释放三代比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="d_release_three" name="d_release_three" value="{$config.d_release_three}">
+                            </div>
+                            <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">一级所需业绩：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_one" name="yj_one" value="{$config.yj_one}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">一级分成比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_one_p" name="yj_one_p" value="{$config.yj_one_p}">
+                            </div>
+                             <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">二级所需业绩：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_two" name="yj_two" value="{$config.yj_two}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">二级分成比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_two_p" name="yj_two_p" value="{$config.yj_two_p}">
+                            </div>
+                             <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">三级所需业绩：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_three" name="yj_three" value="{$config.yj_three}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">三级分成比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_three_p" name="yj_three_p" value="{$config.yj_three_p}">
+                            </div>
+                             <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">四级所需业绩：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_four" name="yj_four" value="{$config.yj_four}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">四级分成比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_four_p" name="yj_four_p" value="{$config.yj_four_p}">
+                            </div>
+                             <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">五级所需业绩：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_one" name="yj_one" value="{$config.yj_one}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">五级分成比例：</label>
+                            <div class="col-sm-1">
+                                <input type="text" class="form-control" id="yj_one_p" name="yj_one_p" value="{$config.yj_one_p}">
+                            </div>
+                             <label class="col-sm-1 control-label">%</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <a class="btn btn-white" href="javascript:history.go(-1)">返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/state/js/jquery.min.js"></script>
+<script src="/state/js/jquery.form.js"></script>
+<script src="/state/js/plugins/switchery/switchery.js"></script>
+<script src="/state/js/plugins/layer/layer.min.js"></script>
+<script src="/state/js/common.js"></script>
+<script>
+    $(function(){
+        $('#form1').ajaxForm({
+            //beforeSubmit: checkFun,
+            success: complete,
+            dataType: 'json'
+        });
+        /*function checkFun(){
+            if($('#interest').val() == ''){
+                layer.msg("利率设置不能为空", {icon: 5},function(index)
+                {
+                    return index;
+                });
+                // return false;
+            }
+        }*/
+        function complete(data){
+            if(data.status == 0){ 
+                layer.msg(data.message,{icon:6,time:1000},function(){
+                    location.reload();
+                })
+            }else{
+                layer.msg(data.message,{icon:5,time:1000},function(){
+                    location.reload();
+                })
+            }
+            
+        }
+
+    })
+</script>
+</body>
+</html>
